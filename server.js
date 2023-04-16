@@ -30,6 +30,10 @@ async function dbConnect() {
 app.use("/api/account", accountRoute);
 app.use("/api/detail", detailRoute);
 app.use("/api/admin", adminRoute);
+app.use(express.static(path.join(__dirname, "./client/build")));
+app.get("/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+})
 
 app.listen(PORT, () => {
     console.log(`port ${PORT}`);
